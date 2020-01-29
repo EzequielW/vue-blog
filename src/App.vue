@@ -1,28 +1,47 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app id="main-app">
+    <Header />
+
+    <v-content>
+      <v-container fluid>
+        <router-view/>
+        <router-link to="/write">
+          <v-btn
+            color="green"
+            fab
+            fixed
+            large
+            dark
+            bottom
+            right
+            class="v-btn--example"
+          >
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
+        </router-link>
+      </v-container>
+    </v-content>
+
+    
+    
+    <v-footer
+      color="indigo lighten-1"
+    >
+      <span class="white--text">&copy; 2019</span>
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/layout/Header';
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    HelloWorld
+    Header
   }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
 </style>
