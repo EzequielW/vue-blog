@@ -1,17 +1,15 @@
 <template>
-    <v-row align="center" justify="center">
-        <v-col cols="10">
+    
             <v-card elevation="0">
-                <v-container>
+                <div class="post-wrap">
                     <v-card-subtitle>{{date}}</v-card-subtitle>
                     <v-card-title class="justify-center single-post-title">{{title}}</v-card-title>
                     <v-card-text>
-                        <div v-html="content"></div>
+                        <div class="post-content" v-html="content"></div>
                     </v-card-text>
-                </v-container>
+                </div>
             </v-card>
-        </v-col>
-    </v-row>
+     
 </template>
 
 <script>
@@ -19,6 +17,7 @@ import Api from '../services/Api'
 
 export default {
     name: 'PostSingle',
+    props: ['post_id'],
     data() {
         return {
             title: '',
@@ -27,8 +26,7 @@ export default {
         }
     },
     created() {
-        console.log(this.content)
-        Api().get('/posts/' + this.$route.params.id)
+        Api().get('/posts/' + this.post_id)
             .then(res => {
                 this.title = res.data.title
                 this.content = res.data.content
@@ -40,8 +38,19 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .single-post-title{
         margin-bottom: 4%;
+    }
+
+    .post-wrap{
+        padding: 2% 15% 2% 15%;
+    }
+
+    .post-content{
+        &::v-deep img {
+            max-width: 100%;
+            height: auto;
+        }
     }
 </style>
